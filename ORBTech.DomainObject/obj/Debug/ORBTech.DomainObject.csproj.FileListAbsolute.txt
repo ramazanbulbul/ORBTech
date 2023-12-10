@@ -1,0 +1,12 @@
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\bin\Debug\ORBTech.DomainObject.dll.config
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\bin\Debug\ORBTech.DomainObject.dll
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\bin\Debug\ORBTech.DomainObject.pdb
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\bin\Debug\EntityFramework.dll
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\bin\Debug\EntityFramework.xml
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\obj\Debug\ORBTech.DomainObject.csproj.AssemblyReference.cache
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\obj\Debug\ORBTech.DomainObject.csproj.CoreCompileInputs.cache
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\obj\Debug\ORBTech.DomainObject.csproj.CopyComplete
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\obj\Debug\ORBTech.DomainObject.dll
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.DomainObject\obj\Debug\ORBTech.DomainObject.pdb

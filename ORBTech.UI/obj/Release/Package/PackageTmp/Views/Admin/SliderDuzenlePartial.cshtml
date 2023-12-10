@@ -1,0 +1,78 @@
+﻿@using ORBTech.DTO
+@model SliderDTO
+@{
+    ViewBag.Title = "SliderDuzenlePartial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>Slider Düzenle</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Admin/Index/">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Slider Düzenle</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Slider Formu</h5>
+
+        <!-- Horizontal Form -->
+        <form method="post" action="/Admin/SliderDuzenle/">
+            <div class="row mb-3">
+                <input type="hidden" class="form-control" name="SLIDER_ID" value="@(Model != null ? Model.SLIDER_ID + "" : "0")" />
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Başlık</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="BASLIK" value="@(Model != null ? Model.BASLIK : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Açıklama</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ACIKLAMA" value="@(Model != null ? Model.ACIKLAMA : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Resim URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="RESIM_URL" value="@(Model != null ? Model.RESIM_URL : "")">
+                </div>
+            </div>
+        <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">WEB URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="WEB_URL" value="@(Model != null ? Model.WEB_URL : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Sıra No</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="SIRA_NO" value="@(Model != null ? Model.SIRA_NO + "" : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="PASIF" onclick="checkboxChange()" value="@(Model != null ? Model.PASIF : 0)" name="PASIF" @(Model != null ? (Model.PASIF == 1 ? "CHECKED" : "") : "")>
+                        <label class="form-check-label" for="PASIF">
+                            Pasif
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </form><!-- End Horizontal Form -->
+
+    </div>
+</div>
+
+<script>
+    function checkboxChange() {
+        $('#PASIF').val($('#PASIF').val() == 1 ? 0 : 1);
+    }
+</script>

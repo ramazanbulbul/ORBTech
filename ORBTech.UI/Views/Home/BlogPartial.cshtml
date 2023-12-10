@@ -1,0 +1,22 @@
+﻿@using ORBTech.DTO
+@model List<BlogDTO>
+<div class="container shadow" style="margin-bottom: 100px; padding: 10px 14px;">
+    <div class="row m-1">
+        @foreach (BlogDTO blog in Model)
+        {
+            <div class="col-sm-4">
+                <div class="card m-1">
+                    <img width="250" height="250" src="@blog.RESIM_URL" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">@blog.BASLIK</h5>
+                        <p class="card-text">@blog.KISA_ACIKLAMA</p>
+                        <a href="/Home/BlogDetayPartial?BLOG_ID=@blog.BLOG_ID" class="btn btn-primary stretched-link">Devamını Oku</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+
+</script>

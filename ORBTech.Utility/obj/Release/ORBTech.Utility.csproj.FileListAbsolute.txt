@@ -1,0 +1,6 @@
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.Utility\bin\Release\ORBTech.Utility.dll
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.Utility\bin\Release\ORBTech.Utility.pdb
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.Utility\obj\Release\ORBTech.Utility.csproj.AssemblyReference.cache
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.Utility\obj\Release\ORBTech.Utility.csproj.CoreCompileInputs.cache
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.Utility\obj\Release\ORBTech.Utility.dll
+C:\Users\ramazan.bulbul\source\repos\ORBTech\ORBTech.Utility\obj\Release\ORBTech.Utility.pdb

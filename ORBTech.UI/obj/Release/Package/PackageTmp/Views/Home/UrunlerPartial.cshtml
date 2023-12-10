@@ -1,0 +1,28 @@
+﻿@using ORBTech.DTO
+@model List<UrunDTO>
+<style>
+    p {
+    }
+</style>
+<div class="container shadow" style="margin-bottom: 100px; padding: 10px 14px;">
+    <div class="row m-1">
+        @foreach (UrunDTO urun in Model)
+        {
+            <div class="col-sm-4">
+                <div class="card m-1">
+                    <img width="250" height="250" src="@urun.RESIM_URL" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">@urun.BASLIK</h5>
+                        <p class="card-text">
+                            @Html.Raw(urun.KISA_ACIKLAMA)
+                        </p>
+                        <a href="/Home/UrunDetayPartial?URUN_ID=@urun.URUN_ID" class="btn btn-primary stretched-link">Devamını Oku</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+
+</script>

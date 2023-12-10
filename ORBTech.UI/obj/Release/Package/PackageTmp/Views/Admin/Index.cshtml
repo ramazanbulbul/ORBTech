@@ -1,0 +1,198 @@
+﻿@using ORBTech.DTO
+@using ORBTech.Utility
+
+@model List<LogDTO>
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<div class="pagetitle">
+    <h1>Blog Listesi</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Admin/Index/">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Log Listesi</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Log Analizi</h5>
+                    <div class="row">
+                        <div class="col-4">
+                            <canvas id="yilTiklamaGrafigi" style="width:100%;max-width:600px"></canvas>
+                            <strong>
+                                Toplam: <span>@Model.Where(p => p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count</span>
+                            </strong>
+                            <script>
+                            var xValues = [
+                                "Ocak",
+                                "Şubat",
+                                "Mart",
+                                "Nisan",
+                                "Mayıs",
+                                "Haziran",
+                                "Temmuz",
+                                "Ağustos",
+                                "Eylül",
+                                "Ekim",
+                                "Kasım",
+                                "Aralık"];
+                            var yValues = [
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "01" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "02" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "03" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "04" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "05" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "06" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "07" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "08" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "09" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "10" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "11" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "12" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Count,
+                            ];
+                            var barColors = ["blue", "black", "red", "white", "green", "purple", "yellow","orange", "violet", "silver", "gold", "gray"];
+
+                            new Chart("yilTiklamaGrafigi", {
+                                type: "bar",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        backgroundColor: barColors,
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: { display: false },
+                                    title: {
+                                        display: true,
+                                        text: "@DateTime.Now.Year Yılı Tıklama Grafiği"
+                                    }
+                                }
+                            });
+                            </script>
+                        </div>
+                        <div class="col-4">
+                            <canvas id="yilKullaniciGrafigi" style="width:100%;max-width:600px"></canvas>
+                            <strong>
+                                Toplam:<span id="yilKullaniciGrafigiToplam"></span>
+                            </strong>
+                            <script>
+                            var xValues = [
+                                "Ocak",
+                                "Şubat",
+                                "Mart",
+                                "Nisan",
+                                "Mayıs",
+                                "Haziran",
+                                "Temmuz",
+                                "Ağustos",
+                                "Eylül",
+                                "Ekim",
+                                "Kasım",
+                                "Aralık"];
+                            var yValues = [
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "01" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "02" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "03" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "04" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "05" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "06" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "07" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "08" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "09" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "10" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "11" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                                @Model.Where(p => p.GIRIS_ZAMANI.Split('.')[1] == "12" && p.GIRIS_ZAMANI.Split('.')[2].Split(' ')[0] == DateTime.Now.Year.ToString()).ToList().Select(p => p.GIRIS_YAPAN_IP).Distinct().ToList().Count,
+                            ];
+                                var toplam = 0;
+                                for (var i = 0; i < yValues.length; i++) {
+                                    toplam += yValues[i];
+                                }
+                                $('#yilKullaniciGrafigiToplam').html(toplam);
+                            var barColors = ["blue", "black", "red", "white", "green", "purple", "yellow","orange", "violet", "silver", "gold", "gray"];
+
+                            new Chart("yilKullaniciGrafigi", {
+                                type: "bar",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        backgroundColor: barColors,
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: { display: false },
+                                    title: {
+                                        display: true,
+                                        text: "@DateTime.Now.Year Yılı Kullanıcı Sayısı Grafiği"
+                                    }
+                                }
+                            });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Log Listesi</h5>
+                    <!-- Default Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Giriş Zamanı</th>
+                                <th scope="col">Sayfa Anahtarı</th>
+                                <th scope="col">Geldiği URL</th>
+                                <th scope="col">Gittiği URL</th>
+                                <th scope="col">Giriş Yapan IP</th>
+                                <th scope="col">Giriş Yapan Kullanıcı</th>
+                                <th scope="col">Giriş Yapan Cihaz</th>
+                                <th scope="col">Tarayıcı Bilgisi</th>
+                                <th scope="col">Tarayıcı Versiyonu</th>
+                                <th scope="col">Mobil Cihaz Model</th>
+                                <th scope="col">Platform</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (LogDTO log in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@log.LOG_ID</th>
+                                    <td>@log.GIRIS_ZAMANI</td>
+                                    <td>@log.SAYFA_ANAHTARI</td>
+                                    <td>@log.GELDIGI_URL</td>
+                                    <td>@log.GITTIGI_URL</td>
+                                    <td>@log.GIRIS_YAPAN_IP</td>
+                                    <td>@log.LOGON_USER_KODU</td>
+                                    <td>@(log.MOBIL_CIHAZ == "1" ? "MOBIL" : "DIGER")</td>
+                                    <td>@log.TARAYICI_BILGISI</td>
+                                    <td>@log.VERSION</td>
+                                    <td>@log.MOBIL_CIHAZ_MODEL</td>
+                                    <td>@log.PLATFORM</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- End Default Table Example -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

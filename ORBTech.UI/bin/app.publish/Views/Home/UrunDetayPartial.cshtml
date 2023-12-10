@@ -1,0 +1,15 @@
+﻿@using ORBTech.DTO
+@model UrunDTO
+<div class="container shadow" style="margin-bottom: 100px; padding: 10px 14px;">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="text-center">@Model.BASLIK</h4>
+            <div class="col-12 text-center">
+                <img style="max-height:600px" class="col-12" src="@Model.RESIM_URL" alt="@Model.BASLIK" />
+            </div>
+            <div class="m-5">
+                @Html.Raw(Model.ACIKLAMA)
+            </div>
+        </div>
+    </div>
+</div>

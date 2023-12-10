@@ -1,0 +1,109 @@
+﻿@using ORBTech.DTO
+@model KurumDTO
+@{
+    ViewBag.Title = "KurumDuzenlePartial";
+    Layout = "~/Views/Shared/_FTRLayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>Kurum Düzenle</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/FTR/Index/">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Kurum Düzenle</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Kurum Formu</h5>
+
+        <!-- Horizontal Form -->
+        <form method="post" action="/FTR/KurumDuzenle/">
+            <div class="row mb-3">
+                <input type="hidden" class="form-control" name="KURUM_ID" value="@(Model != null ? Model.KURUM_ID + "" : "0")" />
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Kurum Tipi</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="KURUM_TIPI">
+                        <option value="0" @(Model != null ? (Model.KURUM_TIPI == 0 ? " selected ": "") : "selected")>Seçiniz</option>
+                        <option value="1" @(Model != null ? (Model.KURUM_TIPI == 1 ? " selected ": "") : "")>Tedarikçi</option>
+                        <option value="2" @(Model != null ? (Model.KURUM_TIPI == 2 ? " selected ": "") : "")>Müşteri</option>
+                        <option value="3" @(Model != null ? (Model.KURUM_TIPI == 3 ? " selected ": "") : "")>Tedarikçi/Müşteri</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Adı</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_ADI" value="@(Model != null ? Model.KURUM_ADI : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Açıklama</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="KURUM_ACIKLAMA">@(Model != null ? Model.KURUM_ACIKLAMA : "")</textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Adresi</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="KURUM_ADRESI">@(Model != null ? Model.KURUM_ADRESI : "")</textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Kurum Hesap No</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_HESAP_NO" value="@(Model != null ? Model.KURUM_HESAP_NO : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">IBAN</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_IBAN" value="@(Model != null ? Model.KURUM_IBAN : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">TC NO</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_TC_NO" value="@(Model != null ? Model.KURUM_TC_NO + "" : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Vergi No</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_VERGI_NO" value="@(Model != null ? Model.KURUM_VERGI_NO + "" : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Vergi Dairesi</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_VERGI_DAIRESI" value="@(Model != null ? Model.KURUM_VERGI_DAIRESI + "" : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Yetkili Ünvan</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_YETKILI_UNVAN" value="@(Model != null ? Model.KURUM_YETKILI_UNVAN + "" : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Yetkili Ad Soyad</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_YETKILI_ADSOYAD" value="@(Model != null ? Model.KURUM_YETKILI_ADSOYAD + "" : "")">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Yetkili Tel</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="KURUM_YETKILI_TEL" value="@(Model != null ? Model.KURUM_YETKILI_TEL + "" : "")">
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </form><!-- End Horizontal Form -->
+
+    </div>
+</div>

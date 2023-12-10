@@ -1,0 +1,116 @@
+﻿@using ORBTech.DTO
+@model List<FaturaDTO>
+@{
+    ViewBag.Title = "FaturaListesiPartial";
+    Layout = "~/Views/Shared/_FTRLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Fatura Listesi</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/FTR/Index/">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Fatura Listesi</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Fatura Sorgula</h5>
+                    <div class="row">
+                        <div class="row col-sm-3">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">Fatura ID</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="FATURA_ID" value="@(ViewBag.FATURA_ID)">
+                            </div>
+                        </div>
+                        <div class="row col-sm-3">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">Kurum</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="KURUM_ID">
+                                    <option value="">Seçiniz</option>
+                                    @foreach (KurumDTO kurum in ViewBag.KURUM_LIST)
+                                    {
+                                        <option value="@kurum.KURUM_ID" @(ViewBag.KURUM_ID == kurum.KURUM_ID.ToString() ? " selected " : "")>@kurum.KURUM_ADI</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row col-sm-6">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Fatura Kesim Tarihi</label>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" id="FATURA_KESIM_TARIHI_MIN" value="@ViewBag.FATURA_KESIM_TARIHI_MIN">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" id="FATURA_KESIM_TARIHI_MAX" value="@ViewBag.FATURA_KESIM_TARIHI_MAX">
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="#"class="form-control" onclick="window.location.href = '/FTR/FaturaListesiPartial?FATURA_ID='+$('#FATURA_ID').val()+'&KURUM_ID='+$('#KURUM_ID').val()+''+'&FATURA_KESIM_TARIHI_MIN='+$('#FATURA_KESIM_TARIHI_MIN').val()+''+'&FATURA_KESIM_TARIHI_MAX='+$('#FATURA_KESIM_TARIHI_MAX').val()+'';"><i class="bi bi-search-heart-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Fatura Listesi</h5>
+                    <!-- Default Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Fatura Tipi</th>
+                                <th scope="col">Kurum</th>
+                                <th scope="col">Fatura Kesim Tarihi</th>
+                                <th scope="col">KDVsiz Tutar</th>
+                                <th scope="col">KDV Oranı</th>
+                                <th scope="col">Toplam</th>
+                                <th scope="col">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (FaturaDTO fatura in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@fatura.FATURA_ID</th>
+                                    <td>@(fatura.FATURA_TIPI == 0 ? "BELİRTİLMEMİŞ" : (fatura.FATURA_TIPI == 1 ? "ALIŞ" : (fatura.FATURA_TIPI == 2 ? "SATIŞ" : "BELİRTİLMEMİŞ")))</td>
+                                    <td>@fatura.KURUM.KURUM_ADI</td>
+                                    <td>@fatura.FATURA_KESIM_TARIHI</td>
+                                    <td>@fatura.KDVSIZ_FATURA_TUTARI</td>
+                                    <td>@fatura.KDV_ORANI</td>
+                                    <td>@((double.Parse(fatura.KDVSIZ_FATURA_TUTARI) + (double.Parse(fatura.KDVSIZ_FATURA_TUTARI) * double.Parse(fatura.KDV_ORANI)/100)).ToString("0,##"))</td>
+                                    <td>
+                                        <a target="_blank" href="@fatura.FATURA_URL"><i class="bi bi-search-heart-fill"></i></a>
+                                        <a href="/FTR/FaturaDuzenlePartial?FATURA_ID=@fatura.FATURA_ID/"> <i class="bi bi-pencil-fill"></i></a>
+                                        <a href="/FTR/FaturaSil?FATURA_ID=@fatura.FATURA_ID/"> <i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td>@Model.Count</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@Model.Average(p=> double.Parse(p.KDVSIZ_FATURA_TUTARI)).ToString("0,##")</td>
+                                <td></td>
+                                <td>@Model.Average(p=> double.Parse(p.KDVSIZ_FATURA_TUTARI) + (double.Parse(p.KDVSIZ_FATURA_TUTARI) * double.Parse(p.KDV_ORANI) / 100)).ToString("0,##")</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Default Table Example -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

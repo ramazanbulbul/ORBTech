@@ -1,0 +1,38 @@
+﻿@using ORBTech.DTO
+@model List<SliderDTO>
+<header class="mt-5">
+    <div id="carouselExampleIndicators" style="width: 99%;  text-align:center; margin: 25px 8px auto;" class="carousel slide shadow" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <li data-target="#carouselExampleIndicators" data-slide-to="@i" @(i==0 ? "class='active'" : "")></li>
+            }
+        </ol>
+        <div class="carousel-inner">
+            @foreach (SliderDTO slider in Model)
+            {
+                <div class="carousel-item @(slider.SIRA_NO== 1 ? "active" : "")">
+                    <a href="@(slider.WEB_URL == "" ? "#": slider.WEB_URL )" target="_blank">
+                        <img class="d-block w-100" src="@slider.RESIM_URL" alt="@slider.BASLIK">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5 style="color: white;">@slider.BASLIK</h5>
+                            <p style="color: white;">
+                                @slider.ACIKLAMA
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            }
+            
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Önceki</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Sonraki</span>
+        </a>
+    </div>
+
+</header>
